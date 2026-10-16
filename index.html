@@ -4,125 +4,224 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Replace with your name -->
-  <title>About | Your Name</title>
+  <title>Jyoti Prakash Rai | Senior Backend Engineer</title>
   
   <style>
-    /* Basic Layout Styling to replicate the clean Minimalist theme */
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #fdfdfd;
-      margin: 0;
-      padding: 0;
+    /* Global Variables */
+    :root{--primary:#1a1a1a;--accent:#4f46e5;--muted:#6b7280;--bg:#f9fafb;--border:#e5e7eb}
+    
+    /* Core Layout Setup */
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;color:#2d3748;background:#fdfdfd;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+    .wrapper{max-width:850px;margin:0 auto;padding:0 24px}
+    
+    /* Tab Architecture Controls - Bulletproof Class Switching */
+    .tab-content {
+      display: block; 
     }
-    .wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 20px;
+    .tab-content.hidden-panel {
+      display: none !important; /* Forcefully overrides any cascade conflicts */
     }
-    header class="site-header" {
-      border-top: 5px solid #424242;
-      border-bottom: 1px solid #e8e8e8;
-      min-height: 56px;
-    }
-    .site-title {
-      font-size: 18px;
-      font-weight: 500;
-      line-height: 56px;
-      letter-spacing: -1px;
-      margin-bottom: 0;
-      float: left;
-      color: #424242;
-      text-decoration: none;
-    }
-    .site-nav {
-      float: right;
-      line-height: 56px;
-    }
-    .site-nav .page-link {
-      color: #424242;
-      text-decoration: none;
-      padding: 5px 10px;
-    }
-    .page-content {
-      padding: 30px 0;
-    }
-    .post-title {
-      font-size: 42px;
-      letter-spacing: -1px;
-      line-height: 1;
-    }
-    /* Portrait Image formatting */
-    .about-portrait {
-      float: left;
-      margin-right: 20px;
-      margin-bottom: 20px;
-      max-width: 200px;
-      border-radius: 4px;
-    }
-    .post-content p {
-      margin-bottom: 15px;
-    }
-    footer {
-      border-top: 1px solid #e8e8e8;
-      padding: 40px 0;
-      margin-top: 40px;
-      color: #828282;
-    }
-    a { color: #2a7ae2; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    /* Navigation Bar Styling */
+    .site-header{border-top:5px solid var(--primary);border-bottom:1px solid var(--border);min-height:56px;background:#fff;position:sticky;top:0;z-index:100}
+    .site-header .wrapper{display:flex;justify-content:space-between;align-items:center;height:56px}
+    .site-title{font-size:19px;font-weight:700;letter-spacing:-0.5px;color:var(--primary);text-decoration:none}
+    .site-nav{display:flex;gap:5px}
+    .tab-link{color:var(--muted);text-decoration:none;padding:8px 14px;cursor:pointer;font-weight:500;font-size:14px;border-radius:6px;transition:all .2s ease}
+    .tab-link:hover{color:var(--primary);background:#f3f4f6}
+    .tab-link.active{color:#fff;background:var(--primary)}
+    
+    /* Typography & Layout Scopes */
+    .page-content{padding:50px 0}
+    .post-title{font-size:36px;font-weight:800;letter-spacing:-1px;color:var(--primary);margin:0 0 24px 0}
+    h2.section-heading{font-size:22px;font-weight:700;letter-spacing:-0.5px;color:var(--primary);border-bottom:2px solid #f3f4f6;padding-bottom:8px;margin:40px 0 20px 0}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    
+    /* Profile Specific Cards Styling */
+    .profile-hero{margin-bottom:30px}
+    .profile-hero h1{font-size:40px;margin:0 0 8px 0;letter-spacing:-1px}
+    .profile-subtitle{font-size:18px;color:var(--muted);margin:0 0 16px 0}
+    .meta-bar{display:flex;flex-wrap:wrap;gap:15px;font-size:14px;color:#4b5563}
+    .skills-grid{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:600px){.skills-grid{grid-template-columns:1fr 1fr}}
+    .skill-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px}
+    .skill-category{font-size:13px;font-weight:700;text-transform:uppercase;color:#4b5563;margin-bottom:10px}
+    .chips-group{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:#fff;border:1px solid #d1d5db;padding:4px 10px;border-radius:20px;font-size:13px;font-weight:500}
+    
+    /* Interactive Timeline Design */
+    .timeline{position:relative;padding-left:24px;margin-left:8px;border-left:2px solid var(--border)}
+    .timeline-item{position:relative;margin-bottom:35px}
+    .timeline-item::before{content:"";position:absolute;left:-31px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--accent)}
+    .timeline-header{display:flex;flex-wrap:wrap;justify-content:space-between;margin-bottom:8px}
+    .company-title{font-size:18px;font-weight:700;color:var(--primary);margin:0}
+    .timeline-date{font-size:13px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:12px;font-weight:500}
+    .role-block{margin-bottom:18px}
+    .role-title{font-size:15px;font-weight:600;color:#374151;margin:2px 0 6px 0;font-style:italic}
+    .timeline-list{margin:0;padding-left:18px;font-size:14.5px;color:#4b5563}
+    
+    /* Collapsible Logic */
+    details.philosophy-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;padding:14px}
+    details.philosophy-card summary{font-weight:600;cursor:pointer;color:#1f2937;list-style:none;position:relative;padding-left:20px}
+    details.philosophy-card summary::before{content:"▶";position:absolute;left:0;font-size:11px;top:2px;color:var(--muted)}
+    details.philosophy-card[open] summary::before{transform:rotate(90deg);color:var(--accent)}
+    .philosophy-content{padding:10px 0 0 20px;font-size:14.5px;color:#4b5563}
+    
+    .about-portrait{float:left;margin:0 25px 20px 0;max-width:200px;border-radius:6px}
+    .quote-block{text-align:center;font-style:italic;color:var(--muted);margin:40px 0 10px 0}
   </style>
+
+  <!-- JAVASCRIPT STATE ENGINE -->
+  <script>
+    function switchTab(targetTabId, clickedTabElement) {
+      var panels = document.querySelectorAll('.tab-content');
+      var links = document.querySelectorAll('.tab-link');
+
+      // Hide all panels via safety utility class allocation
+      for (var i = 0; i < panels.length; i++) {
+        panels[i].classList.add('hidden-panel');
+      }
+
+      // Remove active decoration highlights from nav links
+      for (var j = 0; j < links.length; j++) {
+        links[j].classList.remove('active');
+      }
+
+      // Mount targeted active container cleanly
+      var activePanel = document.getElementById(targetTabId);
+      if (activePanel) {
+        activePanel.classList.remove('hidden-panel');
+      } else {
+        console.error("DOM Initialization Critical failure: " + targetTabId + " panel node missing.");
+      }
+
+      // Re-apply highlight to navigation bar action button
+      if (clickedTabElement) {
+        clickedTabElement.classList.add('active');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </head>
 <body>
 
-  <header class="site-header" role="banner">
+  <!-- HEADER NAVIGATION BAR LAYOUT -->
+  <header class="site-header">
     <div class="wrapper">
-      <!-- 1. Change your site branding heading here -->
-      <a class="site-title" href="/">Your Name</a>
+      <a class="site-title" href="#">Jyoti Prakash Rai</a>
       <nav class="site-nav">
-        <div class="trigger">
-          <a class="page-link" href="/about.html">About</a>
-        </div>
+        <a class="tab-link active" onclick="switchTab('about', this)">About</a>
+        <a class="tab-link" onclick="switchTab('profile', this)">Profile</a>
+        <a class="tab-link" onclick="switchTab('blogs', this)">Blogs</a>
       </nav>
     </div>
   </header>
 
-  <main class="page-content" aria-label="Content">
+  <!-- MAIN VIEW CONTAINER -->
+  <main class="page-content">
     <div class="wrapper">
-      <article class="post">
-        <header class="post-header">
-          <h1 class="post-title">About Me</h1>
-        </header>
 
+      <!-- ==================== TAB 1: ABOUT MODULE PANEL ==================== -->
+      <section id="about" class="tab-content">
+        <h1 class="post-title">About Me</h1>
         <div class="post-content">
-          <!-- 2. Replace with your portrait image file path -->
-          <img class="about-portrait" src="https://jyotiprakashrai.github.io/assets/me.png" alt="Your Name" />
-
-          <!-- 3. Rewrite your professional summary below -->
+          <img class="about-portrait" src="https://jyotiprakashrai.github.io/assets/me.png" alt="Jyoti Prakash Rai" />
+          
           <p>
-            <strong>Your Professional Title.</strong> Write a compelling core statement about your background, fields of expertise, and overall professional trajectory here. Mention the types of systems you work on or the primary value you deliver.
+            I am a <strong>Senior Software Development Engineer</strong> with a decade of expertise in designing, scaling, and optimizing mission-critical distributed architectures. My career is defined by an execution-focused mindset. I enjoy making complex initiatives happen and maintaining rigid technical strategy across enterprise-scale server environments.
           </p>
 
           <p>
-            Describe what you usually write about, your personal philosophies on your field, or what interests you outside of work. You can also link back to featured work or blog posts like this <a href="/link-to-your-post">featured essay example</a>.
+            My engineering philosophy centers on <strong>big-picture alignment</strong>. I advocate for comprehensive discovery and exhaustive scoping before implementation begins, ensuring structural integrity and minimizing systemic technical debt down the road. My core expertise covers distributed architectures, high-throughput microservices, and targeted performance tuning. 
           </p>
 
-          <!-- 4. Add your preferred social profiles -->
-          <p>You can find me on <a href="https://linkedin.com">LinkedIn</a> or <a href="https://github.com">GitHub</a>.</p>
+          <p>
+            Beyond technical implementation, I am a mentorship-driven leader who builds collaborative cultures, coaches engineering tracks, and holds systems to high standards. I operate seamlessly across international time zones, bringing zero friction to geographically diverse, cross-functional engineering teams.
+          </p>
         </div>
-      </article>
-    </div>
-  </main>
+      </section>
 
-  <footer class="site-footer">
-    <div class="wrapper">
-      <h2 style="font-size: 18px; margin-bottom: 10px;">Your Name</h2>
-      <p style="font-size: 14px; margin: 0;">A brief tag-line summarizing your website notes or expertise.</p>
-    </div>
-  </footer>
 
-</body>
-</html>
+      <!-- ==================== TAB 2: PROFILE MODULE PANEL (HIDDEN BY DEFAULT) ==================== -->
+      <section id="profile" class="tab-content hidden-panel">
+        <div class="profile-hero">
+          <h1>Jyoti Prakash Rai</h1>
+          <div class="profile-subtitle">Senior Software Development Engineer | Distributed Systems & Platform Enthusiast</div>
+          <div class="meta-bar">
+            <span>📬 <a href="mailto:mr.jyotiprakash@gmail.com">mr.jyotiprakash@gmail.com</a></span>
+            <span>🌍 Bengaluru, India</span>
+            <span>🔗 <a href="https://www.linkedin.com/in/jyotiprakashrai08" target="_blank">LinkedIn Profile</a></span>
+          </div>
+        </div>
+
+        <h2 class="section-heading">🚀 Professional Summary</h2>
+        <p>Passionate and execution-focused Software Engineer with <strong>over 10 years of expertise</strong> in designing, building, and optimizing large-scale server-side architectures. Proven track record of navigating distributed systems, requirement gathering, and driving complex projects from planning to deployment. Mentorship-driven leader who thrives in international, cross-functional, and geographically diverse teams.</p>
+        <p>
+          🔥 <strong>Core Focus:</strong> Distributed Systems, Performance Optimization, and High-Scale Architectures.<br>
+          🌱 <strong>Aspirations:</strong> Deepening footprint in Platform/Infrastructure Engineering and DevOps.
+        </p>
+
+        <h2 class="section-heading">🛠️ Technical Ecosystem</h2>
+        <div class="skills-grid">
+          <div class="skill-card"><div class="skill-category">Backend Languages</div><div class="chips-group"><span class="chip">Java</span><span class="chip">Scala</span></div></div>
+          <div class="skill-card"><div class="skill-category">Frameworks & Libs</div><div class="chips-group"><span class="chip">Spring</span><span class="chip">Spring Boot</span></div></div>
+          <div class="skill-card"><div class="skill-category">Databases</div><div class="chips-group"><span class="chip">PostgreSQL</span><span class="chip">Relational Databases</span></div></div>
+          <div class="skill-card"><div class="skill-category">Cloud & DevOps</div><div class="chips-group"><span class="chip">AWS</span><span class="chip">DevOps Practices</span><span class="chip">Platform Engineering</span></div></div>
+          <div class="skill-card"><div class="skill-category">Architecture</div><div class="chips-group"><span class="chip">Distributed Systems</span><span class="chip">Server-side Architecture</span><span class="chip">Performance Tuning</span></div></div>
+        </div>
+
+        <h2 class="section-heading">💼 Professional Journey</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-header"><h3 class="company-title">IQVIA</h3><span class="timeline-date">Bengaluru, India</span></div>
+            <div class="role-block">
+              <div style="display:flex;justify-content:space-between;flex-wrap:wrap;margin-top:4px;"><div class="role-title">Senior Software Development Engineer</div><span style="font-size:13px;color:var(--muted);font-weight:500;">Oct 2025 – Present</span></div>
+              <ul class="timeline-list">
+                <li>Design and deliver high-throughput, enterprise-scale backend systems for global healthcare technology.</li>
+                <li>Oversee comprehensive requirement gathering, strategic scoping, and end-to-end planning phases.</li>
+                <li>Mentor junior engineering tracks and cross-pollinate engineering best practices.</li>
+              </ul>
+            </div>
+            <div class="role-block">
+              <div style="display:flex;justify-content:space-between;flex-wrap:wrap;"><div class="role-title">Senior Software Developer</div><span style="font-size:13px;color:var(--muted);font-weight:500;">Mar 2021 – Oct 2025 (4 yrs 8 mos)</span></div>
+              <ul class="timeline-list">
+                <li>Engineered resilient server-side components utilizing Java-based ecosystems.</li>
+                <li>Optimized application bottlenecks to significantly reduce database resource contention and compute overhead.</li>
+                                <li>Collaborated daily across international time zones to integrate features seamlessly.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header"><h3 class="company-title">Cognizant</h3><span class="timeline-date">Gurgaon, India</span></div>
+            <div class="role-block">
+              <div style="display:flex;justify-content:space-between;flex-wrap:wrap;margin-top:4px;"><div class="role-title">Software Associate</div><span style="font-size:13px;color:var(--muted);font-weight:500;">Jun 2019 – Feb 2021 (1 yr 9 mos)</span></div>
+              <ul class="timeline-list">
+                <li>Developed cloud-ready applications and monolithic-to-microservice migration adapters.</li>
+                <li>Owned modular testing pipelines ensuring rigid code coverage standard targets.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header"><h3 class="company-title">Infogain</h3><span class="timeline-date">Noida, India</span></div>
+            <div class="role-block">
+              <div style="display:flex;justify-content:space-between;flex-wrap:wrap;margin-top:4px;"><div class="role-title">Software Engineer</div><span style="font-size:13px;color:var(--muted);font-weight:500;">Mar 2018 – May 2019 (1 yr 3 mos)</span></div>
+              <ul class="timeline-list">
+                <li>Contributed to agile application modules focusing on Java application layers.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header"><h3 class="company-title">Mobile Programming LLC.</h3><span class="timeline-date">Gurgaon, India</span></div>
+            <div class="role-block">
+              <div style="display:flex;justify-content:space-between;flex-wrap:wrap;margin-top:4px;"><div class="role-title">Software Engineer</div><span style="font-size:13px;color:var(--muted);font-weight:500;">May 2016 – Feb 2018 (1 yr 10 mos)</span></div>
+              <ul class="timeline-list">
+                <li>Kicked off career in Java-based development platforms, specializing in clean standard backend coding structures.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
